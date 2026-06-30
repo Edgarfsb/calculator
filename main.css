@@ -1,0 +1,105 @@
+html {
+    text-align: center;
+    font-family: monospace;
+}
+
+.calculator {
+    display: flex;
+    min-height: 95vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: lightgoldenrodyellow;
+}
+
+.container {
+    background-color: black;
+    border: 10px solid rgba(47,47,47,1);
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+    gap: 2px;
+}
+
+.display {
+    grid-column: 1 / -1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 5px;
+    font-size: 5.5em;
+    font-weight: initial;
+    text-shadow: 1.3px 1.3px #383838;
+    margin: 5px;
+}
+
+button {
+    margin: 1px;
+    border-radius: 5%;
+    border: none;
+    font-weight: initial;
+    font-size: 2em;
+    font-family: monospace;
+    color: black;
+}
+
+#zero {
+    grid-column: span 2;
+}
+
+.backspace {
+    grid-column: span 2;
+}
+
+.operator {
+    background-color: lightblue;    
+}
+
+.operator:focus {
+    background-color: hsl(195, 53%, 89%);
+}
+
+.equals {
+    background-color: lightblue;
+}
+
+.equals:active {
+    background-color: hsl(195, 53%, 89%);
+}
+
+.digit {
+    background-color: lightgreen;
+}
+
+.digit:active {
+    background-color: hsl(120, 73%, 85%);
+}
+
+.decimal {
+    background-color: lightgreen;
+}
+
+.decimal:active {
+    background-color: hsl(120, 73%, 85%);
+}
+
+.clear {
+    background-color: lightcoral;
+}
+
+.clear:active {
+    background-color: hsl(0, 79%, 82%);
+}
+
+.backspace {
+    background-color: lightcoral;
+}
+
+.backspace:active {
+    background-color: hsl(0, 79%, 82%);
+}
