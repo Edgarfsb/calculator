@@ -47,7 +47,7 @@ function inputOperator(operator) {
         secondOperator = operator;
         secondNumber = displayValue;
         result = operate(Number(firstNumber), Number(secondNumber), firstOperator);
-        displayValue = Math.round(result).toString();
+        displayValue = (Math.round(result * 100) / 100).toString();
         firstNumber = displayValue;
         result = null;
     } else if (firstOperator != null && secondOperator != null) {
@@ -55,7 +55,7 @@ function inputOperator(operator) {
         secondNumber = displayValue;
         result = operate(Number(firstNumber), Number(secondNumber), secondOperator);
         secondOperator = operator;
-        displayValue = Math.round(result).toString();
+        displayValue = (Math.round(result * 100) / 100).toString();
         firstNumber = displayValue;
         result = null;
     } else { 
@@ -77,7 +77,7 @@ function inputEquals() {
         if (result === 'nah') {
             displayValue = 'nah bro';
         } else {
-            displayValue = Math.round(result).toString();
+            displayValue = (Math.round(result * 100) / 100).toString();
             firstNumber = displayValue;
             secondNumber = null;
             firstOperator = null;
@@ -92,7 +92,7 @@ function inputEquals() {
         if (result === 'nah') {
             displayValue = 'nah bro';
         } else {
-            displayValue = Math.round(result).toString();
+            displayValue = (Math.round(result * 100) / 100).toString();
             firstNumber = displayValue;
             secondNumber = null;
             firstOperator = null;
