@@ -113,9 +113,7 @@ function updateDisplay() {
 }
 
 // MISSING BUTTONS
-//BACKSPACE
 //DECIMAL
-//CLEAR
 //MAYBE ADD A FUNCTION THAT ROUNDS USING SCIENTIFIC NOTATION FOR NUMBERS TOO BIG OR TOO SMALL
 function clickButton() {
     for(let i = 0; i < buttons.length; i++) {
@@ -132,6 +130,9 @@ function clickButton() {
             } else if (buttons[i].classList.contains('clear')) {
                 clearAll();
                 updateDisplay();
+            } else if (buttons[i].classList.contains('backspace')) {
+                inputBackspace();
+                updateDisplay();
             }
         })
     }
@@ -144,6 +145,16 @@ function clearAll() {
     firstOperator = null;
     secondOperator = null;
     result = null;
+}
+
+function inputBackspace() {
+    if (displayValue === 'nah bro') {
+        displayValue = '0';
+    } else if (displayValue.length > 1) {
+        displayValue = displayValue.slice(0, -1);
+    } else {
+        displayValue = '0';
+    }
 }
 
 updateDisplay();
