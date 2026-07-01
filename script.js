@@ -1,6 +1,22 @@
 let displayValue = '0';
 const buttons = document.querySelectorAll('button');
 
+function operate(x, y, operator) {
+    if(operator === '+') {
+        return x + y;
+    } else if(operator === '-') {
+        return x - y;
+    } else if(operator === '*') {
+        return x * y;
+    } else if(operator === '/') {
+        if(y === 0) {
+            return 'nah';
+        } else {
+            return x / y;
+        }
+    }
+}
+
 function updateDisplay() {
     const display = document.getElementById('display');
 
