@@ -1,5 +1,16 @@
 let displayValue = '0';
+let firstNumber = null;
+let operator = null;
+let waitingForSecondNumber = false;
 const buttons = document.querySelectorAll('button');
+
+const digitButtons = document.querySelectorAll(".digit");
+const operatorButtons = document.querySelectorAll(".operator");
+const equalsButton = document.querySelector(".equals");
+const clearButton = document.querySelector(".clear");
+const backspaceButton = document.querySelector(".backspace");
+const decimalButton = document.querySelector(".decimal");
+
 
 function operate(x, y, operator) {
     if(operator === '+') {
@@ -41,5 +52,7 @@ function clickButton() {
     }
 }
 
-updateDisplay();
+function updateDisplay() {
+    display.textContent = displayValue;
+}
 clickButton();
