@@ -129,9 +129,21 @@ function clickButton() {
             } else if (buttons[i].classList.contains('equals')) {
                 inputEquals();
                 updateDisplay();
+            } else if (buttons[i].classList.contains('clear')) {
+                clearAll();
+                updateDisplay();
             }
         })
     }
+}
+
+function clearAll() {
+    displayValue = '0';
+    firstNumber = null;
+    secondNumber = null;
+    firstOperator = null;
+    secondOperator = null;
+    result = null;
 }
 
 updateDisplay();
