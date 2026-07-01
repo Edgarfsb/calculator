@@ -1,6 +1,8 @@
 let displayValue = '0';
 let firstNumber = null;
+let secondNumber = null;
 let firstOperator = null;
+let secondOperator = null;
 
 const buttons = document.querySelectorAll('button');
 
@@ -38,6 +40,30 @@ function inputDigit(digit) {
     }
 }
 
+function inputOperator(operator) {
+    if(firstOperator != null && secondOperator === null) {
+        // Handles input of second operator
+        secondOperator = operator;
+        secondNumber = displayValue;
+        result = operate(Number(firstNumber), Number(secondNumber), firstOperator);
+        displayValue = Math.round(result).toString();
+        firstNumber = displayValue;
+        result = null;
+    } else if(firstOperator != null && secondOperator != null) {
+        // For new secondOperator
+        secondNumber = displayValue;
+        result = operate(Number(firstNumber), Number(secondNumber), secondOperator);
+        secondOperator = operator;
+        displayValue = Math.round(result).toString();
+        firstNumber = displayValue;
+        result = null;
+    } else { 
+        // Handles first operator input
+        firstOperator = operator;
+        firstNumber = displayValue;
+    }
+}
+
 function updateDisplay() {
     const display = document.getElementById('display');
 
@@ -57,6 +83,8 @@ function clickButton() {
             if (buttons[i].classList.contains('digit')) {
                 inputDigit(buttons[i].value); 
                 updateDisplay();
+            } else if (buttons[i].classList.contains('operator')) {
+                inputOperator(buttons[i].value);
             }
         })
     }
