@@ -3,6 +3,7 @@ let firstNumber = null;
 let secondNumber = null;
 let firstOperator = null;
 let secondOperator = null;
+let waitSecondNumber = false;
 let result = null;
 
 const buttons = document.querySelectorAll('button');
@@ -23,21 +24,41 @@ function operate(x, y, operator) {
     }
 }
 
+function formatNumber(value) {
+    //for infinity or NaN
+    if (!Number.isFinite(value)) {
+        return value.toString();
+    }
+
+    // Try to see if it fits on display
+    const normal = Number(value.toPrecision(9)).toString();
+
+    if (normal.length <= 9) {
+        return normal;
+    }
+
+    //if it doesn't fit, try scientific notation
+    const exponent = value.toExponential().split("e")[1];
+    const exponentLength = exponent.length + 1;
+
+    // chars for mantissa to fit on display
+    const mantissaLength = 9 - exponentLength;
+    const decimals = Math.max(0, mantissaLength - 2);
+
+    return value.toExponential(decimals);
+}
+
 function inputDigit(digit) {
-    if (firstOperator === null) {
-        if (displayValue === '0' || displayValue === 0) { // First digit input
-            displayValue = digit;
-        } else if (displayValue === firstNumber) { // For a new operation after Equals is pressed
-            displayValue = digit;
-        } else {                                // Input more digits after the first one
-            displayValue += digit;
-        }
-    } else { 
-        if (displayValue === firstNumber) { // After the first operator is dialed 
-            displayValue = digit;
-        } else {
-            displayValue += digit;
-        }
+    if (waitSecondNumber) {
+        displayValue = digit;
+        waitSecondNumber = false;
+        return;
+    }
+
+    if (displayValue === '0') {
+        displayValue = digit;
+    } else {
+        displayValue += digit;
     }
 }
 
@@ -47,21 +68,24 @@ function inputOperator(operator) {
         secondOperator = operator;
         secondNumber = displayValue;
         result = operate(Number(firstNumber), Number(secondNumber), firstOperator);
-        displayValue = (Math.round(result * 100) / 100).toString();
+        displayValue = formatNumber(result).toString();
         firstNumber = displayValue;
+        waitSecondNumber = true;
         result = null;
     } else if (firstOperator != null && secondOperator != null) {
         // For new secondOperator
         secondNumber = displayValue;
         result = operate(Number(firstNumber), Number(secondNumber), secondOperator);
         secondOperator = operator;
-        displayValue = (Math.round(result * 100) / 100).toString();
+        displayValue = formatNumber(result).toString();
         firstNumber = displayValue;
+        waitSecondNumber = true;
         result = null;
     } else { 
         // Handles first operator input
         firstOperator = operator;
         firstNumber = displayValue;
+        waitSecondNumber = true;
     }
 }
 
@@ -77,7 +101,7 @@ function inputEquals() {
         if (result === 'nah') {
             displayValue = 'nah bro';
         } else {
-            displayValue = (Math.round(result * 100) / 100).toString();
+            displayValue = formatNumber(result).toString();
             firstNumber = displayValue;
             secondNumber = null;
             firstOperator = null;
@@ -92,7 +116,7 @@ function inputEquals() {
         if (result === 'nah') {
             displayValue = 'nah bro';
         } else {
-            displayValue = (Math.round(result * 100) / 100).toString();
+            displayValue = formatNumber(result).toString();
             firstNumber = displayValue;
             secondNumber = null;
             firstOperator = null;
@@ -112,8 +136,6 @@ function updateDisplay() {
     }
 }
 
-// MISSING BUTTONS
-//MAYBE ADD A FUNCTION THAT ROUNDS USING SCIENTIFIC NOTATION FOR NUMBERS TOO BIG OR TOO SMALL
 function clickButton() {
     for(let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function() {
@@ -160,13 +182,13 @@ function inputBackspace() {
 }
 
 function inputDecimal(dot) {
-    if (displayValue.includes('.')) {
+    if (waitSecondNumber) {
+        displayValue = '0.';
+        waitSecondNumber = false;
         return;
     }
 
-    if (displayValue === firstNumber && firstOperator !== null) {
-        displayValue = '0' + dot;
-    } else {
+    if (!displayValue.includes('.')) {
         displayValue += dot;
     }
 }
