@@ -171,5 +171,31 @@ function inputDecimal(dot) {
     }
 }
 
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if (!isNaN(key) || key === ".") {
+        inputDigit(key);
+        updateDisplay();
+    }
+    if (["+", "-", "*", "/"].includes(key)) {
+        inputOperator(key);
+        updateDisplay();
+    }
+    if (key === "Enter" || key === "=") {
+        e.preventDefault;
+        inputEquals();
+        updateDisplay();
+    }
+    if (key === "Backspace") {
+        inputBackspace();
+        updateDisplay();
+    }
+    if (key === "Escape") {
+        clearAll();
+        updateDisplay();
+    }
+});
+
 updateDisplay();
 clickButton();
