@@ -228,5 +228,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+
 updateDisplay();
 clickButton();
