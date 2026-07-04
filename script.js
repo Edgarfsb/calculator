@@ -50,8 +50,15 @@ function formatNumber(value) {
 
 function inputDigit(digit) {
     if (displayValue === 'nah bro') {
-       return displayValue = '0';
+        displayValue = '0';
+        firstNumber = null;
+        secondNumber = null;
+        firstOperator = null;
+        secondOperator = null;
+        result = null;
+        return 
     }
+
     if (waitSecondNumber) {
         displayValue = digit;
         waitSecondNumber = false;
@@ -67,7 +74,13 @@ function inputDigit(digit) {
 
 function inputOperator(operator) {
     if (displayValue === 'nah bro') {
-        return displayValue = '0';
+        displayValue = '0';
+        firstNumber = null;
+        secondNumber = null;
+        firstOperator = null;
+        secondOperator = null;
+        result = null;
+        return 
     }
 
     if (waitSecondNumber) {
@@ -107,7 +120,13 @@ function inputOperator(operator) {
 
 function inputEquals() {
     if (displayValue === 'nah bro') {
-        return displayValue = '0';
+        displayValue = '0';
+        firstNumber = null;
+        secondNumber = null;
+        firstOperator = null;
+        secondOperator = null;
+        result = null;
+        return 
     }
     // Hitting equals doesn't display undefined before operate()
     if (firstOperator === null) {
