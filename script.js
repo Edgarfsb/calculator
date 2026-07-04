@@ -69,6 +69,16 @@ function inputOperator(operator) {
     if (displayValue === 'nah bro') {
         return displayValue = '0';
     }
+
+    if (waitSecondNumber) {
+        if (secondOperator !== null) {
+            secondOperator = operator;
+        } else {
+            firstOperator = operator;
+        }
+        return;
+    }
+
     if (firstOperator != null && secondOperator === null) {
         // Handles input of second operator
         secondOperator = operator;
